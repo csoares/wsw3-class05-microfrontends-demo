@@ -1,0 +1,54 @@
+/* The look of the app, shared by both versions so that, on screen, they are
+   the same app. In the micro frontend version only the shell loads this file;
+   each slice brings the CSS of its own components. */
+:root {
+  --ufp-green: #005947;
+  --text: #1c1c1c;
+  --text-muted: #6b6b6b;
+  --line: #e3e3e3;
+  --background: #f7f7f5;
+  --card: #fff;
+  --font: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+body { margin: 0; font-family: var(--font); background: var(--background); color: var(--text); }
+
+.banner { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 10px 24px;
+          font-size: 14px; background: #fff7d6; border-bottom: 1px solid #e8d98a; }
+.banner strong { font-size: 15px; }
+.banner a { margin-left: auto; color: var(--ufp-green); }
+
+.header { display: flex; align-items: center; gap: 16px; padding: 16px 24px;
+          background: var(--ufp-green); color: #fff; }
+.header strong { margin-right: auto; font-size: 18px; }
+.header span { font-variant-numeric: tabular-nums; }
+
+.layout { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; padding: 24px; align-items: start; }
+@media (max-width: 700px) { .layout { grid-template-columns: 1fr; } }
+
+/* "Show the seams": draws where each piece comes from. */
+.seam { position: relative; }
+.seams .seam { outline: 2px dashed var(--seam-colour, #c0392b); outline-offset: 6px; }
+.seams .seam::before { content: attr(data-seam); position: absolute; top: -26px; left: 0;
+  font: 12px/1.4 ui-monospace, Menlo, monospace; padding: 1px 6px; border-radius: 4px;
+  background: var(--seam-colour, #c0392b); color: #fff; white-space: nowrap; }
+.seams > .seam { margin-top: 34px; }
+.seams .layout { padding-top: 40px; }
+.unavailable { padding: 16px; border: 1px solid #b3261e; border-left: 4px solid #b3261e;
+               background: #fff; border-radius: 6px; }
+
+/* catalogue */
+.catalogue h2, .cart h2 { margin: 0 0 12px; font-size: 18px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+.card h3 { margin: 0 0 4px; font-size: 16px; }
+.card p { margin: 0 0 12px; color: var(--text-muted); font-size: 14px; }
+.card button { font: inherit; padding: 6px 12px; border: 0; border-radius: 6px; cursor: pointer;
+               background: var(--ufp-green); color: #fff; }
+
+/* cart */
+.cart { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+.cart ul { list-style: none; margin: 0 0 12px; padding: 0; }
+.cart li { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.cart .total { display: flex; justify-content: space-between; font-weight: 700; }
+.muted { color: var(--text-muted); }
